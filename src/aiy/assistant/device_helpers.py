@@ -73,11 +73,11 @@ def _get_model_id(credentials, session, project_id):
                     "product_name": _DEVICE_NAME,
             },
     }
-    r = session.post(_get_api_url(project_id, "deviceModels"),
-                     data=json.dumps(payload))
-    # Ignore 409, which means we've already created the model ID.
-    if r.status_code != 409:
-        r.raise_for_status()
+    r = session.get(_get_api_url(project_id, "deviceModels", model_id))
+    if r.status_code == 404:
+        r = session.post(_get_api_url(project_id, "deviceModels"),
+                         data=json.dumps(payload))
+    r.raise_for_status()
     return model_id
 
 
