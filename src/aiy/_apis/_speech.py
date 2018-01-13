@@ -98,7 +98,8 @@ class GenericSpeechRequest(object):
 
     def __init__(self, api_host, credentials):
         self.dialog_follow_on = False
-        self.language_code = aiy.i18n.get_language_code()
+        # self.language_code = aiy.i18n.get_language_code()
+        self.language_code = "fr-FR"
         self._audio_queue = queue.Queue()
         self._phrases = []
         self._channel_factory = _ChannelFactory(api_host, credentials)
